@@ -4,7 +4,7 @@ import pygame
 class Vehicle(pygame.sprite.Sprite):
     def __init__(self, image, x, y, speed):
         pygame.sprite.Sprite.__init__(self)
-        self.image = image
+        self.image = pygame.image.load(image).convert_alpha()
         self.x = x
         self.y = y
         self.rect = self.image.get_rect()
@@ -13,10 +13,10 @@ class Vehicle(pygame.sprite.Sprite):
 # Create Player Class that inherits from Car Class
 
 class Player(Vehicle):
-    def move(self):
+    def motion(self):
         self.move = [pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN]
-        self.vx = 5
-        self.vy = 5
+        self.vx = 10
+        self.vy = 10
 
         key = pygame.key.get_pressed()
 
@@ -45,10 +45,7 @@ def main():
     stop_game = False
     
     # initialize player and add direction button controls
-    player = Player(images/player_image.png, 40, 50, 0)
-    player.move = [pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN]
-    player.vx = 5
-    player.vy = 5
+    player = Player('images/player_image.png', 40, 50, 0)
     
     while not stop_game:
         for event in pygame.event.get():
@@ -58,7 +55,7 @@ def main():
                 stop_game = True
 
         # Game logic
-        player.move()
+        player.motion()
 
         # Draw background
         screen.fill(blue_color)
