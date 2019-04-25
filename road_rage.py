@@ -57,6 +57,12 @@ def main():
         # Game logic
         player.motion()
 
+        #hit = pygame.sprite.spritecollide(player, comp_group, True)
+
+        #if hit:
+            # if collision is detected end the game
+            #stop_game = True
+
         # Draw background
         screen.fill(blue_color)
         #screen.blit(background_image, [0, 0])
