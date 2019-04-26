@@ -37,6 +37,15 @@ class Comp(Vehicle):
         if self.x < 0:
             self.kill()
 
+class Truck(Comp):
+    pass
+
+class Car(Comp):
+    pass
+
+class Sport(Comp):
+    pass
+
 def main():
     
     # Initialize game window
@@ -81,6 +90,17 @@ def main():
                     comp_y = 360
                 elif lane == 3:
                     comp_y = 485
+
+                veh_type = random.randint(0, 10)
+                if veh_type >= 8:
+                    new_comp = Truck('images/player_image.png', 1400, comp_y, 10)
+                elif veh_type >= 5:
+                    new_comp = Sport('images/player_image.png', 1400, comp_y, 5)
+                elif veh_type >= 0:
+                    new_comp = Car('images/player_image.png', 1400, comp_y, 7)
+                comps.add(new_comp)
+                all_sprites.add(new_comp)
+
                 new_comp = Comp('images/player_image.png', 1400, comp_y, 5)
                 comps.add(new_comp)
                 all_sprites.add(new_comp)
@@ -91,10 +111,22 @@ def main():
         for comp in comps:
             comp.motion()
 
+        #logic to keep comp cars from hitting each other
+        for car_a in comps:
+            for car_b in comps:
+                if car_a.y == car_b.y:
+                    if (car_a.x < car_b.x):
+                        if (car_b.x - car_a.x < 300):
+                            car_b.speed = car_a.speed
+                    elif car_a.x > car_b.x:
+                        if (car_a.x - car_b.x < 300):
+                            car_a.speed = car_b.speed
+
         hit = pygame.sprite.spritecollide(player, comps, True)
 
         if hit:
             #if collision is detected end game
+            print("You collided!")
             stop_game = True
 
         # Draw background
