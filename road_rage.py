@@ -29,6 +29,16 @@ class Player(Vehicle):
             if key[self.move[2:4][i]]:
                 self.rect.y += self.vy * [-1, 1][i]
 
+        #keep player on screen
+        if self.rect.left < 0:
+            self.rect.left = 0
+        elif self.rect.right > 1200:
+            self.rect.right = 1200
+        if self.rect.top <= 0:
+            self.rect.top = 0
+        elif self.rect.bottom >= 600:
+            self.rect.bottom = 600
+
 # define Comp class
 class Comp(Vehicle):
     def motion(self):
