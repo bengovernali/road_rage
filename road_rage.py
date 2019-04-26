@@ -41,6 +41,8 @@ def main():
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('My Game')
 
+    background_image = pygame.image.load('images/background_image.png').convert_alpha()
+
     # Game initialization
     stop_game = False
     
@@ -65,7 +67,7 @@ def main():
 
         # Draw background
         screen.fill(blue_color)
-        #screen.blit(background_image, [0, 0])
+        screen.blit(background_image, [0, 0])
 
         # Draw player, enemy, and other vehicles
         player_group = pygame.sprite.Group()
