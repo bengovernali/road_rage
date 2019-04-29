@@ -8,6 +8,7 @@ class Vehicle(pygame.sprite.Sprite):
         self.image = pygame.image.load(image).convert_alpha()
         self.x = x
         self.y = y
+        self.type = type
         self.speed = speed
         self.rect = self.image.get_rect()
         self.rect.center = [self.x, self.y]
@@ -48,13 +49,13 @@ class Comp(Vehicle):
             self.kill()
 
 class Truck(Comp):
-    type = 'truck'
+    pass
 
 class Car(Comp):
-    type = 'car'
+    pass
 
 class Sport(Comp):
-    type = 'car'
+    pass
 
 def main():
     
@@ -103,15 +104,15 @@ def main():
 
                 veh_type = random.randint(0, 10)
                 if veh_type >= 8:
-                    new_comp = Truck('images/truck.png', 1400, comp_y, 10)
+                    new_comp = Truck('images/car.png', 1400, comp_y, 10)
                 elif veh_type >= 5:
-                    new_comp = Sport('images/car.png.png', 1400, comp_y, 5)
+                    new_comp = Sport('images/car.png', 1400, comp_y, 5)
                 elif veh_type >= 0:
-                    new_comp = Car('images/car.png.png', 1400, comp_y, 7)
+                    new_comp = Car('images/car.png', 1400, comp_y, 7)
                 comps.add(new_comp)
                 all_sprites.add(new_comp)
 
-                new_comp = Comp('images/player_image.png', 1400, comp_y, 5)
+                new_comp = Comp('images/car.png', 1400, comp_y, 5)
                 comps.add(new_comp)
                 all_sprites.add(new_comp)
 
@@ -124,16 +125,12 @@ def main():
         #logic to keep comp cars from hitting each other
         for car_a in comps:
             for car_b in comps:
-                if car_a.type == 'car' or car_b.type == 'truck':
-                    dist = 700
-                else:
-                    dist = 300
                 if car_a.y == car_b.y:
                     if (car_a.x < car_b.x):
-                        if (car_b.x - car_a.x < dist):
+                        if (car_b.x - car_a.x < 300):
                             car_b.speed = car_a.speed
                     elif car_a.x > car_b.x:
-                        if (car_a.x - car_b.x < dist):
+                        if (car_a.x - car_b.x < 300):
                             car_a.speed = car_b.speed
 
         hit = pygame.sprite.spritecollide(player, comps, True)
