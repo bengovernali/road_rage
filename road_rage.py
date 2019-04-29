@@ -103,11 +103,11 @@ def main():
 
                 veh_type = random.randint(0, 10)
                 if veh_type >= 8:
-                    new_comp = Truck('images/player_image.png', 1400, comp_y, 10)
+                    new_comp = Truck('images/car.png', 1400, comp_y, 10)
                 elif veh_type >= 5:
-                    new_comp = Sport('images/player_image.png', 1400, comp_y, 5)
+                    new_comp = Sport('images/car.png.png', 1400, comp_y, 5)
                 elif veh_type >= 0:
-                    new_comp = Car('images/player_image.png', 1400, comp_y, 7)
+                    new_comp = Car('images/car.png.png', 1400, comp_y, 7)
                 comps.add(new_comp)
                 all_sprites.add(new_comp)
 
