@@ -64,7 +64,7 @@ def main():
     blue_color = (97, 159, 182)
     pygame.init()
     screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption('My Game')
+    pygame.display.set_caption('Road Rage')
 
     background_image = pygame.image.load('images/background_image.png').convert_alpha()
 
