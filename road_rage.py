@@ -48,13 +48,13 @@ class Comp(Vehicle):
             self.kill()
 
 class Truck(Comp):
-    pass
+    type = 'truck'
 
 class Car(Comp):
-    pass
+    type = 'car'
 
 class Sport(Comp):
-    pass
+    type = 'car'
 
 def main():
     
@@ -103,7 +103,7 @@ def main():
 
                 veh_type = random.randint(0, 10)
                 if veh_type >= 8:
-                    new_comp = Truck('images/car.png', 1400, comp_y, 10)
+                    new_comp = Truck('images/truck.png', 1400, comp_y, 10)
                 elif veh_type >= 5:
                     new_comp = Sport('images/car.png.png', 1400, comp_y, 5)
                 elif veh_type >= 0:
@@ -124,12 +124,16 @@ def main():
         #logic to keep comp cars from hitting each other
         for car_a in comps:
             for car_b in comps:
+                if car_a.type == 'car' or car_b.type == 'truck':
+                    dist = 700
+                else:
+                    dist = 300
                 if car_a.y == car_b.y:
                     if (car_a.x < car_b.x):
-                        if (car_b.x - car_a.x < 300):
+                        if (car_b.x - car_a.x < dist):
                             car_b.speed = car_a.speed
                     elif car_a.x > car_b.x:
-                        if (car_a.x - car_b.x < 300):
+                        if (car_a.x - car_b.x < dist):
                             car_a.speed = car_b.speed
 
         hit = pygame.sprite.spritecollide(player, comps, True)
